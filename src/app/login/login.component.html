@@ -1,0 +1,40 @@
+<div class="loginBody">
+    <div class="mainBody">
+        <div class="row">
+            <div class="loginBox">
+                <div class="col-md-12">
+                    <div class="heading">
+                        <h1>LOGIN</h1>
+                    </div>
+                    <form [formGroup]="loginForm">
+                        <div class="email">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Email</mat-label>
+                                <input matInput placeholder="Enter Email" required name="email_id"
+                                    formControlName="email_id">
+                                <mat-error>Email is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="password">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Password</mat-label>
+                                <input type="password" matInput placeholder="Enter your password"
+                                    formControlName="password" required trim>
+                                <mat-error>Password is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="button">
+                            <button id="loginBtn" mat-raised-button (click)="login()"
+                                style="color: white; font-family: poppins;">Login</button>
+                        </div>
+                        <div class="singUp">
+                            <p routerLink="/singup">Don't have an account?</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
