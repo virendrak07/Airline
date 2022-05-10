@@ -54,9 +54,15 @@ th {
     margin-top: 5%;
 }
 .form {
+    padding: 2%;
     display: flex;
     flex-direction: row;
     align-items: baseline;
     align-content: center;
     justify-content: space-evenly;
+  }
+  .mat-paginator-sticky {
+    bottom: 0px;
+    position: sticky;
+    z-index: 10;
   }
