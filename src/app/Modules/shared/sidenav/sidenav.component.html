@@ -1,0 +1,19 @@
+<mat-drawer-container class="SidenavBody">
+    <mat-drawer class="drawerContent" mode="side" opened>
+        <h1 style="margin-left: 30%; margin-top: 30%;">Hotel Logo</h1>
+        <mat-list style="margin-top: 30%;">
+            <mat-list-item id="sidenav-item" routerLink="./overview"
+                routerLinkActive="active-list-item">
+                <span></span><span id="sidnav-menu">Dashboard</span>
+            </mat-list-item>
+        </mat-list>
+        <mat-list>
+            <mat-list-item id="sidenav-item">
+                <span></span><span id="sidnav-menu" (click)="logOut()">Logout</span>
+            </mat-list-item>
+        </mat-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

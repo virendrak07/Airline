@@ -1,0 +1,23 @@
+.SidenavBody {
+    width: 100%;
+    height: 100vh;
+    background-color: unset;
+    border: 1px solid #555;
+  }
+  .drawerContent{
+      width: 20%;
+      background-color: unset;
+      background-image: linear-gradient(140deg, #1b47802e, #a9c5dd33);
+  }
+  .drawerList{
+  display: grid;
+    justify-content: center;
+    margin-top: 70%;
+}
+  #sidenav-item {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 16px !important;
+    margin-bottom: 10%;
+    }
