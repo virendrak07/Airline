@@ -3,25 +3,25 @@
         <div class="heading col-md-12">
             <h1 style="    font-weight: bold;
             font-size: xx-large;
-            color: white;"><u>Flight Details</u></h1>
+            color: rgb(0, 0, 0);"><u>Flight Details</u></h1>
         </div>
 
         <div class="form">
-            <mat-form-field appearance="outline" class="example-form-field">
-                <mat-label>Choose a date</mat-label>
+            <!-- <mat-form-field appearance="outline" class="example-form-field">
+                <mat-label>Choose a date</mat-label> -->
                 <!-- <input matInput [matDatepicker]="datepicker"> -->
-                <input matInput [matDatepicker]="datepicker" [(ngModel)]="dateValue">
+                <!-- <input matInput [matDatepicker]="datepicker" [(ngModel)]="dateValue">
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
                 <mat-datepicker #datepicker>
                     <mat-datepicker-actions>
-                        <button mat-button matDatepickerCancel>Cancel</button>
+                        <button mat-button matDatepickerCancel>Cancel</button> -->
                         <!-- <button mat-raised-button color="primary" matDatepickerApply>Apply</button> -->
-                        <button mat-raised-button color="primary" matDatepickerApply
+                        <!-- <button mat-raised-button color="primary" matDatepickerApply
                             (click)="onDateChange()">Apply</button>
                     </mat-datepicker-actions>
                 </mat-datepicker>
-            </mat-form-field>
+            </mat-form-field> -->
             <!-- <article>
                 <h2><span>Select a day:</span></h2>
                 <mat-select #matSelect required (change)="selectChangeHandler($event)">
@@ -34,8 +34,7 @@
             <mat-form-field appearance="outline">
                 <mat-label>Terminals</mat-label>
                 <select matNativeControl [(ngModel)]="selectedTerminal" name="terminal" (change)="selectChangeHandler($event)">
-                  <option value="" selected></option>
-                  <option *ngFor="let terminal of terminals" [value]="terminal.value">
+                  <option *ngFor="let terminal of terminals" [value]="terminal.value" >
                     {{terminal.viewValue}}
                   </option>
                 </select>
@@ -44,9 +43,10 @@
         </div>
         <div class="mat-elevation-z8" style="width: 70%;
         margin-left: 16%;
+        height: 400px;
         margin-top: 5%;">
+        <label>** note - Maximum working hours on a single flight is 1 Hour </label>
             <div class="table" style="width: 100%;
-            height: 400px;
             max-width: 100%;
             overflow: auto;">
                 <table mat-table [dataSource]="dataSource" matSort>
@@ -75,6 +75,11 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Terminal
                         </th>
                         <td mat-cell *matCellDef="let element"> {{element.terminal}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="difference">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Flight Halts 
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.difference}} </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                     <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>

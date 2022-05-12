@@ -40,31 +40,62 @@ export class DashboardComponent implements OnInit {
     this.getFlightData();
   }
 
-  displayedColumns = ['_id', 'arrivalDateTimestamp', 'departureDateTimestamp', 'terminal'];
+  displayedColumns = ['_id', 'arrivalDateTimestamp', 'departureDateTimestamp', 'terminal', 'difference'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(private router: Router, private httpService: CommonHttpService) {
     this.dataSource = new MatTableDataSource<any>(this.ELEMENT_DATA);
     this.getFlightData()
   }
+  // ---*******FlightData API
+  // auth: Virendra Kadam.*****------
 
-  // FlightData API
-  // auth: Virendra Kadam.
-  
   getFlightData() {
     this.httpService.getSecure(`${environment.getFlightData}/${this.selectedTerminal}`).subscribe((data: any) => {
       if (!data.error) {
-        console.log(data)
         this.indexList = data;
         this.ELEMENT_DATA = data;
         this.dataSource = new MatTableDataSource(this.indexList);
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
         this.dataSource.paginator = this.paginator;
+        for(let i=0; i<this.ELEMENT_DATA.length; i++){
+          var value = this.ELEMENT_DATA[i];
+          let differance = this.timeDifference(value[`arrivalTimestamp`], value[`departureTimestamp`])
+          value['difference']=differance
+          console.log(value)
+        }
       }
     }, error => {
       console.log("API error", error);
     });
   }
+
+  //Flight Halts 
+  timeDifference(date1: any, date2: any) {
+    date1 = new Date(date1 );
+    date2 = new Date(date2 );
+    var difference = date2.getTime() - date1.getTime();
+
+    var daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
+    difference -= daysDifference * 1000 * 60 * 60 * 24
+
+    var hoursDifference = Math.floor(difference / 1000 / 60 / 60);
+    difference -= hoursDifference * 1000 * 60 * 60
+
+    var minutesDifference = Math.floor(difference / 1000 / 60);
+    difference -= minutesDifference * 1000 * 60;
+
+
+    const calculateDiff = daysDifference + ' day ' +
+      hoursDifference + ' hour ' +
+      minutesDifference + ' minute '
+      return(calculateDiff)
+  }
+  //   timeDifferance:any;
+  // selectTime(){
+  // this.timeDifferance = this.ELEMENT_DATA.departureDateTimestamp - this.ELEMENT_DATA.arrivalDateTimestamp
+  // }
+
   onDateChange() {
     this.timeStamp = this.dateValue * 1000;
     console.log(this.timeStamp);

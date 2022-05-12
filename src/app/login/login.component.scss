@@ -4,6 +4,10 @@
     display: flex;
     // justify-content: center;
     align-items: center;
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("../../assets/pexels-alireza-akhlaghi-10826404.jpeg");
 
     .mainBody {
         width: 25%;
@@ -19,9 +23,8 @@
 
             .loginBox {
                 width: 90%;
-                // margin: 20px;
                 border-radius: 10px;
-                background-color: white;
+                background-color: #f3f3f3;
                 box-shadow: 3px 3px 3px #00000024;
             }
         }

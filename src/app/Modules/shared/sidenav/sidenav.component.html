@@ -1,7 +1,13 @@
 <mat-drawer-container class="SidenavBody">
     <mat-drawer class="drawerContent" mode="side" opened>
-        <h1 style="margin-left: 30%; margin-top: 30%;">Hotel Logo</h1>
+        <h1 style="margin-left: 30%; margin-top: 30%;">Airline Logo</h1>
         <mat-list style="margin-top: 30%;">
+            <mat-list-item id="sidenav-item" routerLink="./overview"
+                routerLinkActive="active-list-item">
+                <span></span><span id="sidnav-menu">ICAO24 search</span>
+            </mat-list-item>
+        </mat-list>
+        <mat-list>
             <mat-list-item id="sidenav-item" routerLink="./overview"
                 routerLinkActive="active-list-item">
                 <span></span><span id="sidnav-menu">Dashboard</span>
