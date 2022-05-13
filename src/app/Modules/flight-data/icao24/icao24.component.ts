@@ -1,21 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { CommonHttpService } from '../../../service/common-http.service';
-import { environment } from 'src/environments/environment';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { CommonHttpService } from 'src/app/service/common-http.service';
+import { environment } from 'src/environments/environment';
 interface Terminal {
   value: string;
   viewValue: string;
 }
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-icao24',
+  templateUrl: './icao24.component.html',
+  styleUrls: ['./icao24.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class Icao24Component implements OnInit {
   ELEMENT_DATA: any[] = [];
   indexList: any;
   dateValue: any;
@@ -40,7 +39,7 @@ export class DashboardComponent implements OnInit {
     this.getFlightData();
   }
 
-  displayedColumns = ['_id', 'arrivalDateTimestamp', 'departureDateTimestamp', 'terminal', 'difference', 'freeTime'];
+  displayedColumns = ['_id', 'arrivalDateTimestamp', 'departureDateTimestamp', 'terminal', 'difference', 'hr', 'vr'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(private router: Router, private httpService: CommonHttpService) {
@@ -51,7 +50,7 @@ export class DashboardComponent implements OnInit {
   // auth: Virendra Kadam.*****------
 
   getFlightData() {
-    this.httpService.getSecure(`${environment.getFlightData}/${this.selectedTerminal}`).subscribe((data: any) => {
+    this.httpService.getSecure(`${environment.getIcao24}/${this.selectedTerminal}`).subscribe((data: any) => {
       if (!data.error) {
         this.indexList = data;
         this.ELEMENT_DATA = data;
@@ -60,9 +59,8 @@ export class DashboardComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         for(let i=0; i<this.ELEMENT_DATA.length; i++){
           var value = this.ELEMENT_DATA[i];
-          let {calculateDiff,freeTime} = this.timeDifference(value[`arrivalTimestamp`], value[`departureTimestamp`])
-          value['difference']=calculateDiff
-          value['freeTime']=freeTime
+          let differance = this.timeDifference(value[`arrivalTimestamp`], value[`departureTimestamp`])
+          value['difference']=differance
           console.log(value)
         }
       }
@@ -86,15 +84,11 @@ export class DashboardComponent implements OnInit {
     var minutesDifference = Math.floor(difference / 1000 / 60);
     difference -= minutesDifference * 1000 * 60;
 
-    var freeTime = hoursDifference > 1 ? hoursDifference - 1 + ' hour ' + minutesDifference + ' minute ' :  hoursDifference == 1 && minutesDifference > 0 ?  minutesDifference + ' minute ': 0;
-    console.log(freeTime);
-
 
     const calculateDiff = daysDifference + ' day ' +
       hoursDifference + ' hour ' +
       minutesDifference + ' minute '
-console.log(calculateDiff)
-      return({calculateDiff,freeTime})
+      return(calculateDiff)
   }
   //   timeDifferance:any;
   // selectTime(){
