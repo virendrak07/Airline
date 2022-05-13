@@ -22,15 +22,6 @@
                     </mat-datepicker-actions>
                 </mat-datepicker>
             </mat-form-field> -->
-            <!-- <article>
-                <h2><span>Select a day:</span></h2>
-                <mat-select #matSelect required (change)="selectChangeHandler($event)">
-                    <mat-option value="T1">T1</mat-option>
-                    <mat-option value="T2">T2</mat-option>
-                    <p><span>You selected: </span><b>{{selectedDay}}</b></p>
-                </mat-select>
-                
-            </article> -->
             <mat-form-field appearance="outline">
                 <mat-label>Terminals</mat-label>
                 <select matNativeControl [(ngModel)]="selectedTerminal" name="terminal" (change)="selectChangeHandler($event)">
@@ -91,12 +82,8 @@
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                     <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
-                    <!-- Row shown when there is no matching data. -->
-                    <!-- <tr class="mat-row" *matNoDataRow>
-              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td> -->
-                    <!-- </tr> -->
                 </table>
-                <mat-paginator [pageSizeOptions]="[6, 10, 25, 100]" aria-label="Select page of users"
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"
                     class="mat-paginator-sticky"></mat-paginator>
             </div>
         </div>

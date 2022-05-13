@@ -15,10 +15,10 @@ export class SidenavComponent implements OnInit {
   @ViewChild(MatSidenavModule, { static: false }) sidenav!: MatSidenavModule;
 
   showFiller = false;
-  constructor( private route:Router, httpService : CommonHttpService){}
+  constructor(private route: Router, httpService: CommonHttpService) { }
   ngOnInit() {
   }
-  logOut(){
+  logOut() {
     this.route.navigate(['/login']);
   }
 }

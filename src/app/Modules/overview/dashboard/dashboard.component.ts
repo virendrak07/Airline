@@ -47,6 +47,8 @@ export class DashboardComponent implements OnInit {
     this.dataSource = new MatTableDataSource<any>(this.ELEMENT_DATA);
     this.getFlightData()
   }
+
+  
   // ---*******FlightData API
   // auth: Virendra Kadam.*****------
 
@@ -58,11 +60,11 @@ export class DashboardComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.indexList);
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
         this.dataSource.paginator = this.paginator;
-        for(let i=0; i<this.ELEMENT_DATA.length; i++){
+        for (let i = 0; i < this.ELEMENT_DATA.length; i++) {
           var value = this.ELEMENT_DATA[i];
-          let {calculateDiff,freeTime} = this.timeDifference(value[`arrivalTimestamp`], value[`departureTimestamp`])
-          value['difference']=calculateDiff
-          value['freeTime']=freeTime
+          let { calculateDiff, freeTime } = this.timeDifference(value[`arrivalTimestamp`], value[`departureTimestamp`])
+          value['difference'] = calculateDiff
+          value['freeTime'] = freeTime
           console.log(value)
         }
       }
@@ -73,8 +75,8 @@ export class DashboardComponent implements OnInit {
 
   //Flight Halts 
   timeDifference(date1: any, date2: any) {
-    date1 = new Date(date1 );
-    date2 = new Date(date2 );
+    date1 = new Date(date1);
+    date2 = new Date(date2);
     var difference = date2.getTime() - date1.getTime();
 
     var daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
@@ -86,15 +88,16 @@ export class DashboardComponent implements OnInit {
     var minutesDifference = Math.floor(difference / 1000 / 60);
     difference -= minutesDifference * 1000 * 60;
 
-    var freeTime = hoursDifference > 1 ? hoursDifference - 1 + ' hour ' + minutesDifference + ' minute ' :  hoursDifference == 1 && minutesDifference > 0 ?  minutesDifference + ' minute ': 0;
+    // Free Time Fuction
+    var freeTime = hoursDifference > 1 ? hoursDifference - 1 + ' hour ' + minutesDifference + ' minute ' : hoursDifference == 1 && minutesDifference > 0 ? minutesDifference + ' minute ' : 0;
     console.log(freeTime);
 
 
     const calculateDiff = daysDifference + ' day ' +
       hoursDifference + ' hour ' +
       minutesDifference + ' minute '
-console.log(calculateDiff)
-      return({calculateDiff,freeTime})
+    console.log(calculateDiff)
+    return ({ calculateDiff, freeTime })
   }
   //   timeDifferance:any;
   // selectTime(){
